@@ -1,52 +1,42 @@
-# Claude Code Plugins
+# Gemini Reviewer: The "Second Opinion" Skill
 
-A collection of plugins for [Claude Code](https://code.claude.com), Anthropic's CLI for Claude.
+A specialized Gemini CLI skill designed to provide a critical, senior-architectural perspective on feature plans and implementations.
+
+This is NOT a Claude Code plugin. This is a **Gemini CLI Skill** that works alongside your development process to provide an independent "second set of eyes."
+
+## Why Use Gemini Reviewer?
+- **Different Perspective:** Claude often implements the feature; Gemini reviews it from a skeptical, architectural, and security-focused viewpoint.
+- **Read-Only Safety:** Strictly observes and critiques. It will NEVER modify your source code.
+- **Structured Feedback:** Writes detailed, actionable critiques to `docs/features/<id>/gemini-reviews/`.
 
 ## Installation
 
-Add this marketplace to Claude Code:
+To use this skill in any project, install it globally to your Gemini CLI:
 
 ```bash
-/plugin marketplace add schuettc/claude-code-plugins
+gemini skills install https://github.com/schuettc/gemini-reviewer.git
 ```
 
-Then install any plugin:
+## How it Works
+
+Once installed, activate the skill in your Gemini session:
 
 ```bash
-/plugin install <plugin-name>@schuettc-claude-code-plugins
+activate_skill gemini-reviewer
 ```
 
-## Available Plugins
+### Supported Workflow
+The reviewer is pre-configured to understand the "feature-driven" workflow structure (compatible with `schuettc/claude-code-plugins`):
+1.  **Detects Features:** It reads your `docs/features/` directory to find the context of what you are building.
+2.  **Architectural Critique:** It evaluates your `plan.md` and actual code changes.
+3.  **Separate Review Storage:** It saves its findings to a dedicated `gemini-reviews/` folder, ensuring it doesn't interfere with your main development files.
 
-| Plugin | Description | Version |
-|--------|-------------|---------|
-| [feature-workflow](./feature-workflow) | Feature lifecycle with directory-based tracking and event-driven hooks | 4.0.0 |
-
-## Plugin: feature-workflow
-
-Structured feature development with commands, agents, and skills.
-
-**Commands:**
-- `/feature-capture` - Capture feature ideas to docs/features/
-- `/feature-plan` - Plan implementation with specialized agents
-- `/feature-ship` - Verify quality gates before completion
-
-**Install:**
-```bash
-/plugin install feature-workflow@schuettc-claude-code-plugins
-```
-
-See [feature-workflow/README.md](./feature-workflow/README.md) for full documentation.
-
-## Development Mode
-
-To test plugins locally:
-
-```bash
-git clone https://github.com/schuettc/claude-code-plugins.git
-claude --plugin-dir ./claude-code-plugins/<plugin-name>
-```
+## Review Standards
+The reviewer follows a senior-level SOP (defined in `GEMINI.md`) focusing on:
+- **Edge Case Analysis:** Missed failure modes.
+- **Security:** OWASP Top 10 and common pitfalls.
+- **Performance:** Identifying non-obvious bottlenecks.
+- **Maintainability:** Architectural alignment and project conventions.
 
 ## License
-
 MIT
