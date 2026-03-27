@@ -1,36 +1,41 @@
 # Installing and Using the Gemini Reviewer
 
-This repository contains a specialized Gemini CLI skill designed to act as a "second opinion" reviewer for feature-driven development workflows (specifically compatible with `schuettc/claude-code-plugins`).
+This repository contains a specialized Gemini CLI skill designed to act as a "second opinion" reviewer for feature-driven development workflows.
 
-## How to Import/Install
+## Installation (Run in your Terminal)
+
+**IMPORTANT:** The following commands must be executed in your **shell (zsh, bash, etc.)**, not inside an active Gemini session.
 
 ### 1. Global Installation (Recommended)
 To make the Gemini Reviewer available across **all** your projects, install it to your user tier:
 
 ```bash
-# From this repository's root
-gemini skills install .
-
-# Or from GitHub (once you publish)
+# From your terminal, run:
 gemini skills install https://github.com/schuettc/gemini-reviewer.git
 ```
 
 ### 2. Project-Specific Installation
-To use it only within a specific project, copy the `skills/gemini-reviewer` directory to your project's `.gemini/skills/` folder:
+If you prefer to keep it within a specific project, clone the repo and copy the `SKILL.md` to your project's `.gemini/skills/` directory:
 
 ```bash
-mkdir -p .gemini/skills/
-cp -r /path/to/gemini-reviewer/skills/gemini-reviewer .gemini/skills/
+# From your terminal, run:
+mkdir -p .gemini/skills/gemini-reviewer/
+cp /path/to/gemini-reviewer/SKILL.md .gemini/skills/gemini-reviewer/
 ```
 
-## How to Use
+---
 
-1.  **Activate the Skill:** In any Gemini CLI session, run:
+## How to Use (Inside Gemini CLI)
+
+Once the skill is installed, start a Gemini session and use the internal `activate_skill` tool:
+
+1.  **Activate the Skill:**
     ```
     activate_skill gemini-reviewer
     ```
 
-2.  **Run a Review:** Once activated, you can ask Gemini to perform a review. For example:
+2.  **Run a Review:**
+    Ask Gemini to perform a review based on the current context:
     - "Review the current feature plan for 'auth-system'."
     - "Provide a critical perspective on the implementation in `src/api.ts`."
 
