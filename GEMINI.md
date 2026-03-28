@@ -1,4 +1,4 @@
-# Gemini Reviewer: Standard Operating Procedures
+# Feature Reviewer: Standard Operating Procedures
 
 This document defines the behavior of Gemini as a "second perspective" reviewer for this project. These instructions take precedence over general defaults.
 
@@ -11,7 +11,7 @@ This document defines the behavior of Gemini as a "second perspective" reviewer 
 ## Review Workflow
 
 1.  **Contextual Research:**
-    - Use `activate_skill gemini-reviewer` to load specialized instructions.
+    - Use `activate_skill feature-reviewer` to load specialized instructions.
     - Read the `docs/features/<id>/` directory to understand the feature's lifecycle stage (`idea.md`, `plan.md`, `shipped.md`).
     - Examine the actual code changes using `git diff` or `git log`.
 
@@ -32,14 +32,14 @@ To ensure the Gemini CLI instance starts with the correct "Reviewer" context and
 
 ### 1. Manual Activation
 Always start by saying:
-"Please use the `gemini-reviewer` skill to review [feature-id]."
+"Please use the `feature-reviewer` skill to review [feature-id]."
 
 ### 2. Custom Command (Recommended)
 You can define a custom `/feature-review` command in your terminal. Create the following file at `~/.gemini/commands/feature-review.toml`:
 
 ```toml
-description = "Triggers the gemini-reviewer skill to audit a feature plan or implementation."
-prompt = "Please use the `gemini-reviewer` skill to critique the following feature: {{args}}. Remember you are a READ-ONLY reviewer."
+description = "Triggers the feature-reviewer skill to audit a feature plan or implementation."
+prompt = "Please use the `feature-reviewer` skill to critique the following feature: {{args}}. Remember you are a READ-ONLY reviewer."
 ```
 
 After creating the file, run `/commands reload` in your Gemini session. You can then trigger a review simply by typing `/feature-review [feature-id]`.

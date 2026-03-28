@@ -1,4 +1,4 @@
-# Gemini Reviewer: The "Second Opinion" Skill
+# Feature Reviewer: The "Second Opinion" Skill
 
 A specialized Gemini CLI skill designed to provide a critical, senior-architectural perspective on feature plans and implementations.
 
@@ -16,7 +16,7 @@ Once installed, start a Gemini session and activate the skill:
 
 ```bash
 # Inside your Gemini CLI session
-activate_skill gemini-reviewer
+activate_skill feature-reviewer
 ```
 
 ### Supported Workflow
