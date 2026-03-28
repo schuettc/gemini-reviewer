@@ -39,7 +39,7 @@ Once the skill is installed, start a Gemini session and use the internal `activa
     - "Review the current feature plan for 'auth-system'."
     - "Provide a critical perspective on the implementation in `src/api.ts`."
 
-    **Pro Tip:** You can also define a custom `/gemini-review` command for this. See `GEMINI.md` for instructions.
+    **Pro Tip:** You can also define a custom `/feature-review` command for this. See `GEMINI.md` for instructions.
 
 ## How it Works
 The Gemini Reviewer is a **Read-Only** agent. It follows a strict SOP defined in its `SKILL.md`:

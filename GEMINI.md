@@ -35,14 +35,14 @@ Always start by saying:
 "Please use the `gemini-reviewer` skill to review [feature-id]."
 
 ### 2. Custom Command (Recommended)
-You can define a custom `/gemini-review` command in your terminal. Create the following file at `~/.gemini/commands/gemini-review.toml`:
+You can define a custom `/feature-review` command in your terminal. Create the following file at `~/.gemini/commands/feature-review.toml`:
 
 ```toml
 description = "Triggers the gemini-reviewer skill to audit a feature plan or implementation."
 prompt = "Please use the `gemini-reviewer` skill to critique the following feature: {{args}}. Remember you are a READ-ONLY reviewer."
 ```
 
-After creating the file, run `/commands reload` in your Gemini session. You can then trigger a review simply by typing `/gemini-review [feature-id]`.
+After creating the file, run `/commands reload` in your Gemini session. You can then trigger a review simply by typing `/feature-review [feature-id]`.
 
 ## Interacting with the Feature Workflow
 
