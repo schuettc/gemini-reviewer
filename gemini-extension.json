@@ -1,0 +1,6 @@
+{
+  "name": "gemini-reviewer",
+  "description": "External reviewer for feature plans and implementations. Posts reviews directly on GitHub draft PRs.",
+  "version": "1.0.0",
+  "contextFileName": "GEMINI.md"
+}
