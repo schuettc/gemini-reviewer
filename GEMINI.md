@@ -8,48 +8,35 @@ This document defines the behavior of Gemini as a "second perspective" reviewer 
 - **PR-Based Reviews:** Post all feedback as GitHub PR reviews and comments using `gh` CLI. Do NOT write review files to the repository.
 - **Constructive & Critical Persona:** Act as a Senior Architect and Security Engineer. Provide the "other perspective" that might be missed during the initial implementation.
 
+## Skills
+
+This repo provides two review skills:
+
+| Skill | Purpose |
+|-------|---------|
+| `feature-review-plan` | Review a proposed plan before implementation begins |
+| `feature-review-impl` | Review code changes before shipping |
+
+Both skills follow the same persona, mandates, and output format. They differ only in the target artifact (plan.md vs code diff).
+
 ## Review Workflow
 
-1.  **Contextual Research:**
-    - Use `activate_skill feature-reviewer` to load specialized instructions.
-    - Read the `docs/features/<id>/` directory to understand the feature's lifecycle stage (`idea.md`, `plan.md`, `shipped.md`).
-    - Examine the actual code changes using `git diff` or `git log`.
+1. **Find the PR:** `gh pr list --head feature/<feature-id>`
+2. **Read context:** PR description, diff, idea.md, plan.md
+3. **Analyze:** Edge cases, security, architecture, performance, plan drift, scope creep, test coverage
+4. **Post review:** `gh pr review` with verdict + findings, plus inline comments via `gh api`
 
-2.  **Read PR Context:**
-    - Find the draft PR for the feature: `gh pr list --head feature/<id>`
-    - Read the PR description for what was done, why, and areas of concern
-    - Read the PR diff for the actual code changes
+## Triggering Reviews
 
-3.  **Analysis Checklist:**
-    - **Edge Cases:** Identify failure modes not covered in the implementation plan.
-    - **Security:** Review for OWASP Top 10 vulnerabilities.
-    - **Performance & Scalability:** Spot non-obvious bottlenecks.
-    - **Architectural Consistency:** Ensure the changes align with the project's established patterns.
-    - **Areas of Concern:** Directly address any concerns flagged in the PR description.
-
-4.  **Reporting:**
-    - Post a PR review using `gh pr review` with verdict and findings.
-    - Post inline comments on specific code issues using `gh api`.
-    - Provide a clear Verdict: **PASS**, **CONDITIONAL PASS**, or **FAIL**.
-    - Focus on high-signal findings. Accuracy and actionability are prioritized over quantity.
-
-## Triggering the Reviewer
-
-To ensure the Gemini CLI instance starts with the correct "Reviewer" context and avoids accidentally implementing code, it is recommended to use an explicit trigger.
-
-### 1. Manual Activation
-Always start by saying:
-"Please use the `feature-reviewer` skill to review [feature-id]."
-
-### 2. Custom Command (Recommended)
-You can define a custom `/feature-review` command in your terminal. Create the following file at `~/.gemini/commands/feature-review.toml`:
-
-```toml
-description = "Triggers the feature-reviewer skill to audit a feature plan or implementation."
-prompt = "Please use the `feature-reviewer` skill to critique the following feature: {{args}}. Remember you are a READ-ONLY reviewer."
+### Plan Review
+```
+Please use the feature-review-plan skill to review the plan at <pr-url> for feature <id>.
 ```
 
-After creating the file, run `/commands reload` in your Gemini session. You can then trigger a review simply by typing `/feature-review [feature-id]`.
+### Implementation Review
+```
+Please use the feature-review-impl skill to review the implementation at <pr-url> for feature <id>.
+```
 
 ## Interacting with the Feature Workflow
 
